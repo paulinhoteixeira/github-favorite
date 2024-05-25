@@ -149,4 +149,6 @@ td .remove{
   background: none;
 
   color: red;
+
+  cursor: pointer;
 }
