@@ -25,6 +25,10 @@ export class Favorites {
 
   }
 
+  save() {
+    localStorage.setItem('@github-favorites', JSON.stringify(this.entries))
+  }
+
   async add(username) {
     try{
       const user = await GithubUser.search(username)
@@ -35,6 +39,7 @@ export class Favorites {
 
       this.entries = [user, ...this.entries]
       this.update()
+      this.save()
     }catch(error){
       alert(error.message)
     }
@@ -46,6 +51,7 @@ export class Favorites {
 
       this.entries = filteredEntries
       this.update()
+      this.save()
   }
 }
 
