@@ -31,6 +31,14 @@ export class Favorites {
 
   async add(username) {
     try{
+
+      const userExists = this.entries.find(entry => entry.login === username)
+      console.log(userExists)
+
+      if(userExists){
+        throw new Error('Usuário já cadastrado!')
+      }
+
       const user = await GithubUser.search(username)
       console.log(user)
       if(user.login === undefined){
