@@ -1,17 +1,4 @@
-export class GithubUser {
-  static search(username){
-    const endpoint = `https://api.github.com/users/${username}`
-
-    return fetch(endpoint)
-      .then(data => data.json())
-      .then( data => ({
-        login: data.login,
-        name: data.name,
-        public_repos: data.public_repos,
-        followers: data.followers
-      }))
-  }
-}
+import { GithubUser } from "./GithubUser.js"
 
 export class Favorites {
   constructor(root) {
@@ -33,14 +20,12 @@ export class Favorites {
     try{
 
       const userExists = this.entries.find(entry => entry.login === username)
-      console.log(userExists)
 
       if(userExists){
         throw new Error('Usuário já cadastrado!')
       }
 
       const user = await GithubUser.search(username)
-      console.log(user)
       if(user.login === undefined){
         throw new Error('Usuário não encontrado!')
       }
